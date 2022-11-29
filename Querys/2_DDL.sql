@@ -1,12 +1,5 @@
-GO
-USE DB_QUINIELAS
-GO
-
-
-
-
 -- Generado por Oracle SQL Developer Data Modeler 20.2.0.167.1538
---   en:        2022-11-13 17:40:48 CST
+--   en:        2022-11-29 15:45:25 CST
 --   sitio:      SQL Server 2012
 --   tipo:      SQL Server 2012
 
@@ -19,7 +12,7 @@ CREATE TABLE APUESTA
      ID_LIGA INTEGER NOT NULL , 
      ID_EQUIPOLOCAL VARCHAR (10) NOT NULL , 
      ID_EQUIPOVISITANTE VARCHAR (10) NOT NULL , 
-     FECHA DATETIME DEFAULT GETDATE() NOT NULL ,  
+     FECHA DATETIME DEFAULT GETDATE() NOT NULL , 
      APUESTA_LOCAL INTEGER NOT NULL , 
      APUESTA_VISITANTE INTEGER NOT NULL , 
      PUNTOS_OBTENIDOS INTEGER , 
@@ -69,6 +62,20 @@ CREATE TABLE GRUPOS
 GO
 
 ALTER TABLE GRUPOS ADD CONSTRAINT GRUPOS_PK PRIMARY KEY CLUSTERED (ID_GRUPO)
+     WITH (
+     ALLOW_PAGE_LOCKS = ON , 
+     ALLOW_ROW_LOCKS = ON )
+GO
+
+CREATE TABLE INVITACIONES 
+    (
+     ID_USUARIO INTEGER NOT NULL , 
+     ID_LIGA INTEGER NOT NULL , 
+     STATUS INTEGER NOT NULL 
+    )
+GO
+
+ALTER TABLE INVITACIONES ADD CONSTRAINT INVITACIONES_PK PRIMARY KEY CLUSTERED (ID_USUARIO, ID_LIGA)
      WITH (
      ALLOW_PAGE_LOCKS = ON , 
      ALLOW_ROW_LOCKS = ON )
@@ -268,6 +275,32 @@ ALTER TABLE GRUPOS
     ON UPDATE NO ACTION 
 GO
 
+ALTER TABLE INVITACIONES 
+    ADD CONSTRAINT INVITACIONES_LIGA_FK FOREIGN KEY 
+    ( 
+     ID_LIGA
+    ) 
+    REFERENCES LIGA 
+    ( 
+     ID_LIGA 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
+ALTER TABLE INVITACIONES 
+    ADD CONSTRAINT INVITACIONES_USUARIO_FK FOREIGN KEY 
+    ( 
+     ID_USUARIO
+    ) 
+    REFERENCES USUARIO 
+    ( 
+     ID_USUARIO 
+    ) 
+    ON DELETE NO ACTION 
+    ON UPDATE NO ACTION 
+GO
+
 ALTER TABLE LIGA 
     ADD CONSTRAINT LIGA_TIPO_LIGA_FK FOREIGN KEY 
     ( 
@@ -393,9 +426,9 @@ GO
 
 -- Informe de Resumen de Oracle SQL Developer Data Modeler: 
 -- 
--- CREATE TABLE                            13
+-- CREATE TABLE                            14
 -- CREATE INDEX                             0
--- ALTER TABLE                             26
+-- ALTER TABLE                             29
 -- CREATE VIEW                              0
 -- ALTER VIEW                               0
 -- CREATE PACKAGE                           0
@@ -419,7 +452,3 @@ GO
 -- 
 -- ERRORS                                   0
 -- WARNINGS                                 0
-
-
-
-
