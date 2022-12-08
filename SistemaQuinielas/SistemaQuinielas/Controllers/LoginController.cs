@@ -53,7 +53,7 @@ namespace SistemaQuinielas.Controllers
                     return oLogin;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return oLogin;
                 }

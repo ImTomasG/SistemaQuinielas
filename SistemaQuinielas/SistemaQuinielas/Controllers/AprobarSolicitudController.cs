@@ -51,7 +51,7 @@ namespace SistemaQuinielas.Controllers
                     return oAprobarSolicitud;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return oAprobarSolicitud;
                 }

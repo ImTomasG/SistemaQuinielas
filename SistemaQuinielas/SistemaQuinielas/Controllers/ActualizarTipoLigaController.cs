@@ -69,7 +69,7 @@ namespace SistemaQuinielas.Controllers
                     return oActualizarTipoLiga;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return oActualizarTipoLiga;
                 }

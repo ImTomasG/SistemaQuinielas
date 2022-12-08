@@ -53,7 +53,7 @@ namespace SistemaQuinielas.Controllers
                     return oEnvioSolicitud;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return oEnvioSolicitud;
                 }

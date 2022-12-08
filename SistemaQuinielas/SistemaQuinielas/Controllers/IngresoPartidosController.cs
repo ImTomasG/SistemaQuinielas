@@ -8,32 +8,32 @@ namespace SistemaQuinielas.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IngresoEquiposController : ControllerBase
+    public class IngresoPartidosController : ControllerBase
     {
-
         private readonly string ConexionSQL;
 
         //Cadena de conexion a la base de datos
-        public IngresoEquiposController(IConfiguration config)
+        public IngresoPartidosController(IConfiguration config)
         {
             ConexionSQL = config.GetConnectionString("ConexionSQL");
         }
 
 
-
         [HttpGet]
-        [Route("{idEquipo}/{nombreEquipo}/{idGrupo}")]
-        public IngresoEquipos IngresoSedes(string idEquipo, string nombreEquipo, string idGrupo)
+        [Route("{idJornada}/{idEuipoLocal}/{idEquipoVisitante}/{idEstadio}/{fecha}")]
+        public IngresoPartidos IngresoPartido(string idJornada,string idEuipoLocal,string idEquipoVisitante,string idEstadio,string fecha)
         {
-            IngresoEquipos oIngresoEquipos = new IngresoEquipos();
+            IngresoPartidos oIngresoPartidos = new IngresoPartidos();
             using (var conexion = new SqlConnection(ConexionSQL))
             {
-                var cmd = new SqlCommand("SP_INGRESAR_TEAM", conexion);
+                var cmd = new SqlCommand("SP_INGRESOPARTIDOS", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@IDEQUIPO", idEquipo);
-                cmd.Parameters.AddWithValue("@NOMBREEQUIPO", nombreEquipo);
-                cmd.Parameters.AddWithValue("@IDGRUPO", idGrupo);
+                cmd.Parameters.AddWithValue("@ID_JORNADA", idJornada);
+                cmd.Parameters.AddWithValue("@ID_EQUIPOLOCAL", idEuipoLocal);
+                cmd.Parameters.AddWithValue("@ID_EQUIPOVISITANTE", idEquipoVisitante);
+                cmd.Parameters.AddWithValue("@ID_ESTADIO", idEstadio);
+                cmd.Parameters.AddWithValue("@FECHA", fecha);
 
                 try
                 {
@@ -43,7 +43,7 @@ namespace SistemaQuinielas.Controllers
                     {
                         while (datosObtenidos.Read())
                         {
-                            oIngresoEquipos = new IngresoEquipos()
+                            oIngresoPartidos = new IngresoPartidos()
                             {
                                 MENSAJE = datosObtenidos["MENSAJE"].ToString()
                             };
@@ -51,18 +51,16 @@ namespace SistemaQuinielas.Controllers
 
                         }
                     }
-                    return oIngresoEquipos;
+                    return oIngresoPartidos;
 
                 }
                 catch (Exception)
                 {
-                    return oIngresoEquipos;
+                    return oIngresoPartidos;
                 }
 
             }
         }
-
-
 
 
 

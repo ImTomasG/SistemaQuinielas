@@ -55,7 +55,7 @@ namespace SistemaQuinielas.Controllers
                     return oCrearLiga;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return oCrearLiga;
                 }

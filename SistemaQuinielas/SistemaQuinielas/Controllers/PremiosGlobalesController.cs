@@ -51,7 +51,7 @@ namespace SistemaQuinielas.Controllers
                     return CantidadPremiosGlobales;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return CantidadPremiosGlobales;
                 }
@@ -94,7 +94,7 @@ namespace SistemaQuinielas.Controllers
                     return CantidadPremiosGlobales;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return CantidadPremiosGlobales;
                 }

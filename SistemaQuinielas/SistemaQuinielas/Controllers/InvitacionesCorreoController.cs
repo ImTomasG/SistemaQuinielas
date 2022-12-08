@@ -53,7 +53,7 @@ namespace SistemaQuinielas.Controllers
                     return oInvitacionesCorreo;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return oInvitacionesCorreo;
                 }

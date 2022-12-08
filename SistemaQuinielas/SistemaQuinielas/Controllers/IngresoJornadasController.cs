@@ -8,32 +8,28 @@ namespace SistemaQuinielas.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class IngresoEquiposController : ControllerBase
+    public class IngresoJornadasController : ControllerBase
     {
-
         private readonly string ConexionSQL;
 
         //Cadena de conexion a la base de datos
-        public IngresoEquiposController(IConfiguration config)
+        public IngresoJornadasController(IConfiguration config)
         {
             ConexionSQL = config.GetConnectionString("ConexionSQL");
         }
 
-
-
         [HttpGet]
-        [Route("{idEquipo}/{nombreEquipo}/{idGrupo}")]
-        public IngresoEquipos IngresoSedes(string idEquipo, string nombreEquipo, string idGrupo)
+        [Route("{idJornada}/{nombreJornada}")]
+        public IngresoJornadas IngresoJornada(string idJornada, string nombreJornada)
         {
-            IngresoEquipos oIngresoEquipos = new IngresoEquipos();
+            IngresoJornadas oIngresoJornadas = new IngresoJornadas();
             using (var conexion = new SqlConnection(ConexionSQL))
             {
-                var cmd = new SqlCommand("SP_INGRESAR_TEAM", conexion);
+                var cmd = new SqlCommand("SP_INGRESOJORNADAS", conexion);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@IDEQUIPO", idEquipo);
-                cmd.Parameters.AddWithValue("@NOMBREEQUIPO", nombreEquipo);
-                cmd.Parameters.AddWithValue("@IDGRUPO", idGrupo);
+                cmd.Parameters.AddWithValue("@ID_JORNADA", idJornada);
+                cmd.Parameters.AddWithValue("@NOMBRE_JORNADA", nombreJornada);
 
                 try
                 {
@@ -43,7 +39,7 @@ namespace SistemaQuinielas.Controllers
                     {
                         while (datosObtenidos.Read())
                         {
-                            oIngresoEquipos = new IngresoEquipos()
+                            oIngresoJornadas = new IngresoJornadas()
                             {
                                 MENSAJE = datosObtenidos["MENSAJE"].ToString()
                             };
@@ -51,17 +47,16 @@ namespace SistemaQuinielas.Controllers
 
                         }
                     }
-                    return oIngresoEquipos;
+                    return oIngresoJornadas;
 
                 }
                 catch (Exception)
                 {
-                    return oIngresoEquipos;
+                    return oIngresoJornadas;
                 }
 
             }
         }
-
 
 
 

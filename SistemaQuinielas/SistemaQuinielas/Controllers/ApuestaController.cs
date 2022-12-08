@@ -59,7 +59,7 @@ namespace SistemaQuinielas.Controllers
                     return oApuesta;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return oApuesta;
                 }

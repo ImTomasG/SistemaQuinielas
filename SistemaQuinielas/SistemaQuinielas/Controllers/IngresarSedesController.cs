@@ -56,7 +56,7 @@ namespace SistemaQuinielas.Controllers
                     return oIngresarSedes;
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     return oIngresarSedes;
                 }
